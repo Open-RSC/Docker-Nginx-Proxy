@@ -10,6 +10,7 @@ services:
       - "443:443"
     volumes:
       - conf:/etc/nginx/conf.d
+      - './client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf'
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /etc/letsencrypt:/etc/nginx/certs
