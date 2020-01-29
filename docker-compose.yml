@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:latest
+    image: jwilder/nginx-proxy:latest
     restart: always
     container_name: nginx-proxy
     ports:
@@ -14,12 +14,10 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - ./certs:/etc/nginx/certs
-      - ./nginx:/var/log/nginx
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+      - ./log:/var/log/nginx
 
   dockergen:
-    image: jwilder/docker-gen:0.7.3
+    image: jwilder/docker-gen:latest
     restart: always
     container_name: nginx-proxy-gen
     depends_on:

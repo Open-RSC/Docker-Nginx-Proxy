@@ -1,9 +1,3 @@
-install:
-	`pwd`/scripts/install.sh
-
-ufw-import:
-	cd scripts && `pwd`/ufw-import.sh
-
 logs:
 	@docker-compose logs -f
 
