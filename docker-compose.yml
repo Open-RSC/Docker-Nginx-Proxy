@@ -13,8 +13,8 @@ services:
       - './client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf'
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - /etc/letsencrypt:/etc/nginx/certs
-      - /var/log/nginx:/var/log/nginx
+      - ./certs:/etc/nginx/certs
+      - ./nginx:/var/log/nginx
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
 
@@ -29,32 +29,14 @@ services:
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - /etc/letsencrypt:/etc/nginx/certs
+      - ./certs:/etc/nginx/certs
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
-
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    restart: always
-    container_name: nginx-proxy-le
-    depends_on:
-      - nginx
-      - dockergen
-    environment:
-      NGINX_PROXY_CONTAINER: nginx-proxy
-      NGINX_DOCKER_GEN_CONTAINER: nginx-proxy-gen
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /etc/letsencrypt:/etc/nginx/certs
-      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
   conf:
   vhost:
   html:
-  certs:
 
 # Do not forget to 'docker network create nginx-proxy' before launch, and to add '--network nginx-proxy' to proxied containers.
 

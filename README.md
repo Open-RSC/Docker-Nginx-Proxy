@@ -1,10 +1,10 @@
 # Docker Nginx-Proxy
 
-This allows hosting multiple SSL-enabled websites using a Nginx, Lets Encrypt, and Docker.
+This allows proxying for hosting multiple SSL-enabled websites using a Nginx and Docker.
 
 Based on original guide located at https://blog.ssdnodes.com/blog/host-multiple-ssl-websites-docker-nginx
 
-To ensure a smooth install with all needed components for Open RSC's webserver and to switch from SSH port 22 to port 55555, run the following:
+Ensure that multiple domain covering SSL cert files "default.crt" and "default.key" are placed in the "certs" folder.
 
 ```
 sudo make install
